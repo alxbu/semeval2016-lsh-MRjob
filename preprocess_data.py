@@ -12,7 +12,7 @@ def hash_url(url):
     return hashlib.sha1(url.encode()).hexdigest()[:8].upper()
 
 
-def data_generator(source='data/sts2016-english-with-gs-v1.0/STS2016.input.answer-answer.txt'):
+def data_generator(source='data/sts2016-english-with-gs-v1.0/STS2016.input.answer-answer.txt', hash=True):
     """
     Generator for reading data from source
     :param source: file to read data from
@@ -22,7 +22,10 @@ def data_generator(source='data/sts2016-english-with-gs-v1.0/STS2016.input.answe
     with open(source, 'r') as f:
         for line in f:
             line = line.strip().split('\t')
-            yield line[0], line[1], hash_url(line[2]), hash_url(line[3])
+            if hash:
+                yield line[0], line[1], hash_url(line[2]), hash_url(line[3])
+            else:
+                yield line
 
 
 def write_data_to_file(data_generator, target='data/preprocessed_data.txt'):

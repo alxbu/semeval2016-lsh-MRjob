@@ -1,6 +1,7 @@
 # python preprocess_data.py
 # Description: Preprocess data for training
 import hashlib
+import json
 
 
 def hash_url(url):
@@ -40,12 +41,29 @@ def write_data_to_file(data_generator, target='data/preprocessed_data.txt'):
             f.write('\t'.join(line) + '\n')
 
 
+def write_data_to_json(data_generator, target='data/preprocessed_data.json'):
+    """
+    Writes data to target file
+    :param data_generator: generator for data to be written
+    :param target: target file to write data to
+    :return: None
+    """
+    data_dict = {}
+    with open(target, 'w') as f:
+        for line in data_generator:
+            data_dict[line[2]] = line[0]
+            data_dict[line[3]] = line[1]
+            # write a dict to json file
+        json.dump(data_dict, f)
+
+
 def main():
     """
     Main function
     :return: None
     """
     write_data_to_file(data_generator())
+    write_data_to_json(data_generator(), target='data/preprocessed_data.json')
 
 
 if __name__ == '__main__':

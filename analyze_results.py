@@ -27,6 +27,9 @@ def jaccard_similarity(line1, line2, k=3, word_shingling=False):
     set1 = shingle(line1, k, word_shingling)
     set2 = shingle(line2, k, word_shingling)
 
+    if len(set1.union(set2)) == 0:
+        return 0
+
     return len(set1.intersection(set2)) / len(set1.union(set2))
 
 

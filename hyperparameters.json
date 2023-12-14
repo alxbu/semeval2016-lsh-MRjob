@@ -1,0 +1,6 @@
+{
+  "ks" : [2, 3, 4],
+  "num_hash_functions" : [20, 50, 100],
+  "num_bands" : [5, 10, 20],
+  "word_shingling" : ["True", "False"]
+}

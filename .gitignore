@@ -232,3 +232,5 @@ fabric.properties
 
 # excluded directories from git
 data/
+report/
+output/
